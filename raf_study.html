@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>선행학습</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<style>
+			.ilbuni-1 {
+				position: absolute;
+				width: 100px;
+				transition: 1s;
+			}
+			.ilbuni-2 {
+				width: 100px;
+				height: 100px;
+				margin-left: -50px;
+				position: absolute;
+				bottom: 100px;
+				left: 50%;
+			}
+			.value {
+				margin-top: -5rem;
+				font-size: 7rem;
+				font-weight: 100;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<figure class="ilbuni-1">
+			<img src="images/ilbuni.gif" alt="일분이" />
+		</figure>
+		<div>
+			<img class="ilbuni-2" src="images/ilbuni.gif" alt="일분이" />
+			<div class="value">requstAnimationFrame</div>
+		</div>
+		<script>
+			const ilbuni1 = document.querySelector('.ilbuni-1');
+			window.addEventListener('click', e => {
+				// old
+				// ilbuni-1.style.transform =
+				// 	'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+				// new
+				ilbuni1.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+			});
+			const ilbuni2 = document.querySelector('.ilbuni-2');
+			const value = document.querySelector('.value');
+			let yPos = 0;
+			let rafId;
+			function render() {
+				value.innerHTML = yPos;
+				ilbuni2.style.transform = `translateY(${-yPos}px)`;
+				yPos += 10;
+				rafId = requestAnimationFrame(render);
+				// console.log(rafId);
+				if (yPos > 400) {
+					cancelAnimationFrame(rafId);
+				}
+			}
+			render();
+
+			window.addEventListener('click', () => {
+				cancelAnimationFrame(rafId);
+			});
+			// requestAnimationFrame(() => {
+			// 	console.log(0);
+			// });
+			console.log(1);
+		</script>
+	</body>
+</html>
