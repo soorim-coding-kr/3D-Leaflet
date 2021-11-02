@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Event Delegation</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<style>
+			.menu {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				background: lightgrey;
+				transform: translate(-50%, -50%);
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				padding: 1em 0;
+			}
+			.menu-btn {
+				display: inline-flex;
+				align-items: center;
+				margin: 0 1em;
+				padding: 0.5em 1em 0.5em 0.5em;
+				border: 5px solid #fff;
+				border-radius: 20px;
+				outline: none;
+				font: 900 1.2rem NotoSans;
+				background: linear-gradient(
+					0deg,
+					rgb(168, 143, 2, 1),
+					rgb(248, 244, 0),
+					rgb(248, 244, 0),
+					rgb(248, 244, 0),
+					rgb(248, 244, 0),
+					rgb(248, 244, 0),
+					rgba(255, 255, 255, 1)
+				);
+			}
+			.menu-btn img {
+				width: 50px;
+				margin-right: 0.5em;
+			}
+			/* css 활용 방법 */
+			/* .btn-label {
+				pointer-events: none;
+			}
+			.icon {
+				pointer-events: none;
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="menu">
+			<!-- <button class="menu-btn" data-value="1">
+				<img src="images/ilbuni.gif" alt="" class="icon" />
+				<span class="btn-label">일분이 1</span>
+			</button>
+			<button class="menu-btn" data-value="2">
+				<img src="images/ilbuni.gif" alt="" class="icon" />
+				<span class="btn-label">일분이 2</span>
+			</button>
+			<button class="menu-btn" data-value="3">
+				<img src="images/ilbuni.gif" alt="" class="icon" />
+				<span class="btn-label">일분이 3</span>
+			</button> -->
+		</div>
+		<script>
+			//// old
+			// const btns = document.querySelectorAll('.menu-btn');
+			// console.log(btns);
+			// function clickBtnHandler() {
+			// 	console.log(this);
+			// }
+			// for (let i = 0; i < btns.length; i++) {
+			// 	btns[i].addEventListener('click', clickBtnHandler);
+			// 	// =
+			// 	// btns[0].addEventListener('click', clickBtnHandler);
+			// 	// btns[1].addEventListener('click', clickBtnHandler);
+			// 	// btns[2].addEventListener('click', clickBtnHandler);
+			// 	// addEventListener가 많아지는 만큼 메모리 점유율이 높아져 페이지 성능 저하 유발
+			// }
+
+			const menu = document.querySelector('.menu');
+			function clickHandler(e) {
+				// console.log(e.currentTarget); = this = 이벤트를 호출한 매체
+				// console.log(e.target); = 내부에 클릭하는 요소가 전부 나타남
+				// console.log(e.target.getAttribute('data-value'));
+				//  ===
+				// console.log(e.target.dataset.value);
+				let elem = e.target;
+				while (!elem.classList.contains('menu-btn')) {
+					elem = elem.parentNode;
+					if (elem.nodeName == 'BODY') {
+						elem = null;
+						return;
+					}
+				}
+				console.log(elem.dataset.value);
+			}
+			menu.addEventListener('click', clickHandler);
+
+			window.addEventListener('click', () => {
+				const htmlStr = `
+                    <button class="menu-btn" data-value="1">
+                        <img src="images/ilbuni.gif" alt="" class="icon" />
+                        <span class="btn-label">일분이 1</span>
+                    </button>
+                    <button class="menu-btn" data-value="2">
+                        <img src="images/ilbuni.gif" alt="" class="icon" />
+                        <span class="btn-label">일분이 2</span>
+                    </button>
+                    <button class="menu-btn" data-value="3">
+                        <img src="images/ilbuni.gif" alt="" class="icon" />
+                        <span class="btn-label">일분이 3</span>
+                    </button>
+                `;
+				menu.innerHTML = htmlStr;
+			});
+			//menu 는 원래부터 존재했기때문에 menu에 적용한  click event가 문제없이 적용됨
+		</script>
+	</body>
+</html>
