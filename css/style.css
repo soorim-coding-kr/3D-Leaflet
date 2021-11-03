@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Zen+Kaku+Gothic+New&display=swap');
+html {
+	font-size: 14px;
+}
+body {
+	background: url('../images/tablewood.jpg');
+	/* background-size: auto 130px; */
+	perspective: 1500px;
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+.leaflet {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 32vw;
+	height: 32vw;
+	transform-style: preserve-3d;
+	transition: 1s;
+}
+.page {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 3rem;
+	transform-style: preserve-3d;
+	transition: 1s;
+}
+.page:nth-child(1) {
+	transform-origin: left;
+	z-index: 2;
+}
+.page:nth-child(2) {
+	/* z-index: 3; */
+}
+.page:nth-child(3) {
+	transform-origin: right;
+	z-index: 1;
+}
+.page:nth-child(1).page-flipped {
+	transform: rotateY(-150deg);
+}
+.page:nth-child(3).page-flipped {
+	transform: rotateY(150deg);
+}
+.page-face {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(255, 252, 239);
+	backface-visibility: hidden;
+}
+.page-face:nth-child(2) {
+	transform: rotateY(180deg);
+}
+.page:nth-child(1) .page-face:nth-child(2),
+.page:nth-child(2) .page-face:nth-child(1),
+.page:nth-child(3) .page-face:nth-child(2) {
+	background: rgb(252, 251, 245);
+}
+.cover-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 1.5rem;
+	font-family: 'Dancing Script', cursive;
+	cursor: pointer;
+}
+.cover-page::before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	top: 10px;
+	border: 1px solid tan;
+}
+
+/* in page */
+
+.menu-list {
+	font-size: 0.7rem;
+}
+.menu-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 2em;
+	transition: 0.5s;
+}
+.back-btn {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	display: none;
+}
+.menu-item-photo {
+	width: 20%;
+	padding-bottom: 20%;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+.member-name {
+	font-size: 0.95rem;
+	font-weight: bold;
+}
+.menu-item-info {
+	flex: 1;
+	margin-left: 1em;
+}
+.close-btn {
+	/* display: none; */
+	position: absolute;
+	top: -2rem;
+	right: 10px;
+	font-size: 1.2rem;
+	color: #fff;
+	text-shadow: rgba(0, 0, 0, 0.3) 0 1px 0;
+	backface-visibility: hidden;
+}
+.leaflet-opend .close-btn {
+	display: inline-block;
+}
