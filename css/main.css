@@ -43,7 +43,7 @@ body {
 	transform-style: preserve-3d;
 	transition: 1s;
 	cursor: pointer;
-	animation: start-ani 1s forwards;
+	/* animation: start-ani 1s forwards; */
 }
 .page {
 	position: absolute;
@@ -163,20 +163,3 @@ body {
 .leaflet-opened .close-btn {
 	display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
